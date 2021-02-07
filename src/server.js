@@ -4,7 +4,8 @@ const app = require("./app");
 const { PORT, DATABASE_URL } = require("./config");
 const pg = require("pg");
 
-pg.defaults.ssl = process.env.NODE_ENV === "production";
+pg.defaults.ssl =
+  process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false;
 
 const db = knex({
   client: "pg",
